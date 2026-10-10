@@ -1,0 +1,401 @@
+/* ==========================================================================
+   Scholar Editorial — Emma Jennings-Fitz-Gerald
+   ========================================================================== */
+
+:root {
+  --forest: #2D5A43;
+  --forest-deep: #21402F;
+  --forest-tint: #F1F5F1;
+  --paper: #FBFBFA;
+  --paper-alt: #F7FAF6;
+  --sage: #E5EBE6;
+  --border: #D8DBD7;
+  --ink: #1C1F1D;
+  --ink-soft: #4A524C;
+  --ink-mute: #6E766F;
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --wrap: 1080px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Anchored sections must clear the sticky header when jumped to (header is 76px wide-screen). */
+[id] { scroll-margin-top: 96px; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--forest); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--forest-deep); }
+
+.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 28px; }
+
+/* --- Header ------------------------------------------------------------- */
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--paper);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.site-header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 28px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.wordmark:hover { color: var(--forest); }
+
+.site-nav { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 15px; }
+.site-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1.5px solid transparent;
+}
+.site-nav a:hover { color: var(--forest); }
+.site-nav a[aria-current] { color: var(--forest); border-bottom-color: var(--forest); }
+.site-nav a { transition: color .18s ease, border-color .18s ease; }
+
+/* --- Hero --------------------------------------------------------------- */
+
+.hero { padding: 76px 0 64px; border-bottom: 1px solid var(--border); }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 64px;
+  align-items: start;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin: 0 0 18px;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(38px, 5.6vw, 60px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+  margin: 0 0 20px;
+}
+
+.standfirst {
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0 0 30px;
+  max-width: 34em;
+}
+
+.lede p { 
+  font-family: var(--serif);
+  margin: 0 0 16px; 
+  max-width: 36em; 
+  color: var(--ink-soft); 
+}
+.lede p:last-child { margin-bottom: 0; }
+
+/* --- Areas of Specialization (fills the hero's left column) -------------- */
+
+.hero-spec {
+  margin-top: 38px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+}
+
+/* --- Buttons & link rows ------------------------------------------------ */
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 32px 0 0; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14.5px;
+  font-weight: 500;
+  padding: 11px 20px;
+  border-radius: 3px;
+  border: 1px solid var(--forest);
+  text-decoration: none;
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+.btn-primary { background: var(--forest); color: #fff; }
+.btn-primary:hover { background: var(--forest-deep); border-color: var(--forest-deep); color: #fff; }
+.btn-ghost { background: transparent; color: var(--forest); border-color: var(--border); }
+.btn-ghost:hover { border-color: var(--forest); background: var(--forest-tint); color: var(--forest-deep); }
+
+/* --- Portrait ----------------------------------------------------------- */
+
+.hero-aside { display: flex; flex-direction: column; gap: 24px; }
+
+.portrait {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--sage);
+  overflow: hidden;
+}
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  /* The source is taller than it is wide, so the square crop trims height;
+     centring splits that trim between top and bottom instead of all off the bottom. */
+  object-position: center;
+}
+
+/* --- Sidecard ----------------------------------------------------------- */
+
+.sidecard {
+  border: 1px solid var(--border);
+  background: var(--paper-alt);
+  border-radius: 4px;
+  padding: 24px 24px 22px;
+}
+.sidecard h2 {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  margin: 0 0 16px;
+}
+.sidecard dl { margin: 0; }
+.sidecard dt {
+  font-size: 12.5px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-top: 15px;
+}
+.sidecard dt:first-child { margin-top: 0; }
+.sidecard dd { margin: 3px 0 0; font-size: 15.5px; color: var(--ink); line-height: 1.45; }
+
+/* --- Sections ----------------------------------------------------------- */
+
+.section { padding: 66px 0; border-bottom: 1px solid var(--border); }
+.section:last-of-type { border-bottom: 0; }
+.section-alt { background: var(--paper-alt); }
+
+.section-head { margin-bottom: 34px; }
+.section-head h2 {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.section-head p { margin: 8px 0 0; color: var(--ink-mute); max-width: 40em; }
+
+.rule-label {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin: 0 0 10px;
+}
+
+/* --- Tag pills ---------------------------------------------------------- */
+
+.tags { display: flex; flex-wrap: wrap; gap: 9px; list-style: none; margin: 0; padding: 0; }
+.tags li {
+  font-size: 14px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--sage);
+  color: var(--forest-deep);
+  border: 1px solid var(--border);
+}
+
+/* --- Two column layout -------------------------------------------------- */
+
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px; }
+.cols-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+
+/* --- Entry lists (education, awards, teaching) -------------------------- */
+
+.entries { list-style: none; margin: 0; padding: 0; }
+.entries li {
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 20px;
+  align-items: baseline;
+}
+.entries li:first-child { border-top: 0; padding-top: 0; }
+.entries .year {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink-mute);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.entries .title { font-weight: 500; display: block; }
+.entries .meta { color: var(--ink-mute); font-size: 15px; display: block; margin-top: 2px; }
+
+/* Several courses under one year: each gets its own line, all aligned to the
+   right of the year. Resets the outer .entries li grid/rule for the nested items. */
+.courses { list-style: none; margin: 0; padding: 0; }
+.entries .courses li {
+  display: block;
+  border-top: 0;
+  padding: 0;
+  margin-top: 12px;
+}
+.entries .courses li:first-child { margin-top: 0; }
+
+/* A second labelled group inside a section needs air above its heading. */
+.entries + .rule-label,
+.pub-group + .rule-label { margin-top: 44px; }
+.rule-label + .entries { margin-top: 14px; }
+
+/* --- Subsection headings (within a section) ----------------------------- */
+
+.subhead {
+  margin: 60px 0 26px;
+  padding-top: 34px;
+  border-top: 1px solid var(--border);
+}
+.subhead h3 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  margin: 0;
+}
+.subhead p { margin: 8px 0 0; color: var(--ink-mute); max-width: 40em; }
+.subhead .actions { margin-top: 20px; }
+
+/* --- Publication cards -------------------------------------------------- */
+
+.pub-group { margin-top: 14px; }
+.pub { border-top: 1px solid var(--border); padding: 30px 0; }
+.pub-group .pub:first-child { border-top: 0; padding-top: 4px; }
+
+.pub-index {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+  margin: 0 0 10px;
+}
+.pub h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+  max-width: 38em;
+}
+.pub .authors { margin: 0 0 4px; color: var(--ink-soft); max-width: 46em; }
+.pub .authors strong { font-weight: 600; color: var(--ink); }
+.pub .venue { margin: 0; color: var(--ink-mute); font-size: 15.5px; }
+.pub .venue em { color: var(--ink-soft); }
+
+.badge {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 13.5px;
+  padding: 5px 12px;
+  border-radius: 3px;
+  background: var(--forest-tint);
+  color: var(--forest-deep);
+  border: 1px solid var(--sage);
+}
+
+.pub-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.pub-links a {
+  font-size: 13.5px;
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--forest);
+  background: var(--paper);
+  transition: border-color .18s ease, background-color .18s ease;
+}
+.pub-links a:hover { border-color: var(--forest); background: var(--forest-tint); }
+
+/* --- Footer ------------------------------------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--paper-alt);
+  padding: 46px 0 54px;
+}
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 26px;
+}
+.site-footer p { margin: 0; color: var(--ink-mute); font-size: 15px; }
+.site-footer .name { font-family: var(--serif); font-size: 18px; color: var(--ink); margin-bottom: 4px; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 20px; font-size: 15px; }
+
+/* --- Responsive --------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  /* The nav wraps below this width, making the bar 116-152px tall — too much to
+     pin to the top of a small screen, so let it scroll away. */
+  .site-header { position: static; }
+  [id] { scroll-margin-top: 24px; }
+
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .portrait { max-width: 260px; }
+  .cols, .cols-3 { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+}
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .wrap { padding: 0 20px; }
+  .hero { padding: 48px 0 44px; }
+  .subhead { margin-top: 44px; padding-top: 28px; }
+  .section { padding: 48px 0; }
+  .site-header .wrap { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .site-nav { gap: 8px 18px; }
+  .entries li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .actions .btn { flex: 1 1 auto; justify-content: center; }
+}
